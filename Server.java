@@ -93,7 +93,13 @@ public class Server {
          //------------------------------------------------------------//
 
          while ((s = dis.readLine()) != null) {
-            System.out.println(s);
+             Boolean found = s.contains("log");
+	            Boolean foundexemple = s.contains("exemple");
+				if(found && foundexemple){
+					String cutline[] = s.split("\"");
+						System.out.println("\n");
+						System.out.println(cutline[5]);
+				}
          }
 
       } catch (MalformedURLException mue) {
