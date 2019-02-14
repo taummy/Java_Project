@@ -136,7 +136,9 @@ public class Server {
         
     public static void main(String[] args) {
         // TODO code application logic here
-        listlogs("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/");
+	Server web = new Server("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/","serveur web");
+        listlogs(web.url);
+        //listlogs("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/");
     }
     
 }
