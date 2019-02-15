@@ -4,6 +4,8 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
+
 
 public class Logs {
 	public String addrIP;
@@ -43,17 +45,17 @@ public class Logs {
 		      u = new URL(ST+url);
 		      is = u.openStream();
 		      dis = new DataInputStream(new BufferedInputStream(is));
-		        File ff=new File(url+".txt"); // définir l'arborescence
+		        File ff=new File(url+".txt"); // dÃ©finir l'arborescence
 				ff.createNewFile();
 				FileWriter ffw=new FileWriter(ff);
 		      while ((s = dis.readLine()) != null)
 		      {
 		      
-				ffw.write(s);  // écrire une ligne dans le fichier resultat.txt
-				ffw.write("\n"); // forcer le passage à la ligne
+				ffw.write(s);  // Ã©crire une ligne dans le fichier resultat.txt
+				ffw.write("\n"); // forcer le passage Ã  la ligne
 				
 		      }
-		      ffw.close(); // fermer le fichier à la fin des traitements
+		      ffw.close(); // fermer le fichier Ã  la fin des traitements
 		    }
 		    catch (MalformedURLException mue)
 		    {
@@ -80,7 +82,10 @@ public class Logs {
 
 public static void main(String[] args) {
     // TODO code application logic here
-	String url="exemple.apache2.access.log";
+	//String url="exemple.apache2.access.log";
+	Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the log file you want to save: ");
+        String url=input.nextLine();
 	createLogsFiles(url);
 	}
 
