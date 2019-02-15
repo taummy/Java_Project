@@ -63,7 +63,7 @@ public class Principale {
         
         Server serveur = new Server(link,name);
         servs.add(serveur);
-        System.out.println("Serveur ajoute!");
+        System.out.println("Your new server "+name+" has been added successfully !");
         
         
     }
