@@ -85,8 +85,8 @@ public static void main(String[] args) {
 	//String url="exemple.apache2.access.log";
 	Scanner input = new Scanner(System.in);
         System.out.println("Please enter the log file you want to save: ");
-        String url=input.nextLine();
-	createLogsFiles(url);
+        String log=input.nextLine();
+	createLogsFiles(log);
 	}
 
 }
