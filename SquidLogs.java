@@ -6,9 +6,7 @@
 package server;
 import java.util.*;
 import java.io.*;
-import java.time.*;
 import java.text.*;
-import java.*;
 /**
  *
  * @author freddy
@@ -59,7 +57,7 @@ public class SquidLogs extends Logs {
                 peerHost=(peerStatusPeerHost.split("/"))[1];
                 contentType=splitLine[9];
                 //affichage des informations
-                line ="Un utilisateur s'est connecté avec l'adresse IP interne "+remoteHost+" à l'instant "+dateExacte+" et a demandé l'objet "+url+" hébergé par un serveur à l'adresse IP "+peerHost+". "+bytes+" octets de type "+contentType+" ont été échangés pendant une durée de "+duration+" ms. La méthode HTTP utilisée est "+requestMethod+" et le code HTTP retourné est "+status+".";
+                line ="Un utilisateur s'est connecté avec l'adresse IP interne "+remoteHost+" le "+dateExacte+" et a demandé l'objet "+url+" hébergé par un serveur à l'adresse IP "+peerHost+". "+bytes+" octets de type "+contentType+" ont été échangés pendant une durée de "+duration+" ms. La méthode HTTP utilisée est "+requestMethod+" et le code HTTP retourné est "+status+".";
                 try(BufferedWriter writer = new BufferedWriter(new FileWriter(file+".processed.txt",true))){//on cree un objet BufferedWriter appele writer pour ecrire dans un nouveau fichier nomme a partir du fichier de log passe en parametre+ l'extension .processed.txt
                     writer.write(line+"\n");
                 }
