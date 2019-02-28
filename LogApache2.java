@@ -14,7 +14,6 @@ public class LogApache2 extends Logs{
 	public static String username; // user name determined by HTTP authentication
 	public static String identity; // the identity f the user determined by identd
 	public static String requestType; // request line from the client (GET or HEAD / HTTP/1.0)
-	public static String requestFile; 
 	public static String codeStatus; // the status code sent from the server to the client (200, 206, 401, 403, 404)
 	public static String sizeResponse; // the size of the response to the client (in bytes)
 	public static String refererUrl; // the URL of the page from which this request was initiated) if any is present, and "-" otherwise
@@ -44,7 +43,7 @@ public class LogApache2 extends Logs{
 				sizeResponse=chaine2[2].split("\\s+")[1];
 				refererUrl=chaine2[3];
 				//System.out.println(leTemps);
-				System.out.println(chaine2[3]);
+				//System.out.println(chaine2[3]);
 				lineRead= reader.readLine();
 			}
 			
@@ -56,7 +55,8 @@ public class LogApache2 extends Logs{
         }
 	}
 	
-	public static void main(String[] args) {//testons notre methode apacheProcess
+	//testons notre methode apacheProcess
+	public static void main(String[] args) {
         apacheProcess("exemple.apache2.access.log.txt");
     }
 	
