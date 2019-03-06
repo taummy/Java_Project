@@ -42,8 +42,7 @@ public class LogApache2 extends Logs{
 				codeStatus=chaine2[2].split("\\s+")[0];
 				sizeResponse=chaine2[2].split("\\s+")[1];
 				refererUrl=chaine2[3];
-				//System.out.println(leTemps);
-				//System.out.println(chaine2[3]);
+				userAgent=chaine2[5].split("\\s+")[0];
 				lineRead= reader.readLine();
 			}
 			
