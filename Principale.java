@@ -118,15 +118,12 @@ public static void createNewTableServer(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
                 + "	id integer PRIMARY KEY NOT NULL,\n"
-                + "	remoteHost text NOT NULL,\n"
-                + "	dateExacte text NOT NULL,\n"
-                + "     url text NOT NULL,\n"
-                + "     peerHost text NOT NULL,\n"
-                + "     bytes text NOT NULL,\n"
-                + "     contentType text NOT NULL,\n"
-                + "     duration text NOT NULL,\n"
-                + "     requestMethod text NOT NULL,\n"
-                + "     status text NOT NULL\n"
+                + "	leDate text NOT NULL,\n"
+                + "	lheure text NOT NULL,\n"
+                + " IPConnectee text NOT NULL,\n"
+                + " service text NOT NULL,\n"
+                + " salle text NOT NULL,\n"
+                + " date text NOT NULL,\n"
                 + ");";
         try (Connection connex = DriverManager.getConnection(url);
                 Statement st = connex.createStatement()) {
@@ -135,6 +132,7 @@ public static void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
+
 public static Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:test.db";
@@ -169,7 +167,7 @@ public static Connection connect() {
 
  
  
- /* public static void createNewTableSamba(){
+  public static void createNewTableSamba(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
                 + "	id integer PRIMARY KEY,\n"
@@ -182,7 +180,23 @@ public static Connection connect() {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-}*/
+}
+  public static void insertSamba(String leDate, String lheure,String IPConnectee, String service,String salle, String state){
+      String link= "jdbc:sqlite:test.db";
+      String sql ="INSERT OR IGNORE INTO squidLog(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status) VALUES(?,?,?,?,?,?,?,?,?)";
+      try (Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)) {
+          pst.setString(1,leDate);
+          pst.setString(2,lheure);
+          pst.setString(3,IPConnectee);
+          pst.setString(4,service);
+          pst.setString(5,salle);
+          pst.setString(6,state);
+          pst.executeUpdate();
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+       
+}
   /*
   public static void createNewTableSSH(){
         String url = "jdbc:sqlite:test.db";
