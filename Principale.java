@@ -115,22 +115,19 @@ public static void createNewTableServer(){
 
    
   public static void createNewTableSquid(){
-        String url = "jdbc:sqlite:test.db";
-        String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
-                + "	id integer PRIMARY KEY NOT NULL,\n"
-                + "	leDate text NOT NULL,\n"
-                + "	lheure text NOT NULL,\n"
-                + " IPConnectee text NOT NULL,\n"
-                + " service text NOT NULL,\n"
-                + " salle text NOT NULL,\n"
-                + " date text NOT NULL,\n"
-                + ");";
-        try (Connection connex = DriverManager.getConnection(url);
-                Statement st = connex.createStatement()) {
-                st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+	   String url = "jdbc:sqlite:test.db";
+       String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
+               + "	id integer PRIMARY KEY,\n"
+               + "	url text NOT NULL,\n"
+               + "	serverName text NOT NULL\n"
+               + ");";
+       try (Connection connex = DriverManager.getConnection(url);
+               Statement st = connex.createStatement()) {
+               st.execute(sql);
+       } catch (SQLException e) {
+           System.out.println(e.getMessage());
+       }
+       
 }
 
 public static Connection connect() {
@@ -168,18 +165,23 @@ public static Connection connect() {
  
  
   public static void createNewTableSamba(){
-        String url = "jdbc:sqlite:test.db";
-        String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	url text NOT NULL,\n"
-                + "	serverName text NOT NULL\n"
-                + ");";
-        try (Connection connex = DriverManager.getConnection(url);
-                Statement st = connex.createStatement()) {
-                st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+	  String url = "jdbc:sqlite:test.db";
+      String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
+              + "	id integer PRIMARY KEY NOT NULL,\n"
+              + "	leDate text NOT NULL,\n"
+              + "	lheure text NOT NULL,\n"
+              + " IPConnectee text NOT NULL,\n"
+              + " service text NOT NULL,\n"
+              + " salle text NOT NULL,\n"
+              + " date text NOT NULL,\n"
+              + ");";
+      try (Connection connex = DriverManager.getConnection(url);
+              Statement st = connex.createStatement()) {
+              st.execute(sql);
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+     
 }
   public static void insertSamba(String leDate, String lheure,String IPConnectee, String service,String salle, String state){
       String link= "jdbc:sqlite:test.db";
