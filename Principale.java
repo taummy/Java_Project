@@ -13,6 +13,7 @@ import java.sql.*;
 /**
  *
  * @author freddy
+ * @author irfan
  */
 public class Principale {
     
@@ -69,12 +70,19 @@ public static void createNewTableServer(){
         }
 }
 
- /*public static void createNewTableApache(){
+ public static void createNewTableApache(){
         String url = "jdbc:sqlite:test.db";
-        String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
-                + "	id integer PRIMARY KEY,\n"
-                + "	url text NOT NULL,\n"
-                + "	serverName text NOT NULL\n"
+        String sql = "CREATE TABLE IF NOT EXISTS apacheLog (\n"
+                + "	id integer PRIMARY KEY NOT NULL,\n"
+                + "	date text NOT NULL,\n"
+                + "	temps text NOT NULL\n"
+                + "	username text NOT NULL\n"
+                + "	identity text NOT NULL\n"
+                + "	requestType text NOT NULL\n"
+                + "	codeStatus text NOT NULL\n"
+                + "	sizeResponse text NOT NULL\n"
+                + "	refererUrl text NOT NULL\n"
+                + "	userAgent text NOT NULL\n"
                 + ");";
         try (Connection connex = DriverManager.getConnection(url);
                 Statement st = connex.createStatement()) {
@@ -83,7 +91,28 @@ public static void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
-*/
+
+//Function to insert information to Apache Log table
+ public static void insertApache(String date, String temps, String username, String identity, String requestType, String codeStatus, String sizeResponse, String refererUrl, String userAgent) {
+	 String link= "jdbc:sqlite:test.db";
+	 String sql = "INSERT OR IGNORE INTO apacheLog(date, temps, username, identity, requestType, codeStatus, sizeResponse, refererUrl, userAgent) VALUES(?,?,?,?,?,?,?,?,?)";
+	 try(Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)){
+		 pst.setString(1, date);
+		 pst.setString(2, temps);
+		 pst.setString(3, username);
+		 pst.setString(4, identity);
+		 pst.setString(5, requestType);
+		 pst.setString(6, codeStatus);
+		 pst.setString(7, sizeResponse);
+		 pst.setString(8, refererUrl);
+		 pst.setString(9, userAgent);
+		 
+	 }
+	 catch (SQLException e) {
+         System.out.println(e.getMessage());
+     }
+ }
+
    
   public static void createNewTableSquid(){
         String url = "jdbc:sqlite:test.db";
@@ -137,6 +166,9 @@ public static Connection connect() {
         }
          
  }
+
+ 
+ 
  /* public static void createNewTableSamba(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
