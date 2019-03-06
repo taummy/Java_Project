@@ -222,6 +222,42 @@ public static Connection connect() {
         }
          
  }
+
+ public static void createNewTableSamba(){
+	  String url = "jdbc:sqlite:test.db";
+      String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
+              + "	id integer PRIMARY KEY NOT NULL,\n"
+              + "	leDate text NOT NULL,\n"
+              + "	lheure text NOT NULL,\n"
+              + " IPConnectee text NOT NULL,\n"
+              + " service text NOT NULL,\n"
+              + " salle text NOT NULL,\n"
+              + " date text NOT NULL,\n"
+              + ");";
+      try (Connection connex = DriverManager.getConnection(url);
+              Statement st = connex.createStatement()) {
+              st.execute(sql);
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+     
+}
+  public static void insertSamba(String leDate, String lheure,String IPConnectee, String service,String salle, String state){
+      String link= "jdbc:sqlite:test.db";
+      String sql ="INSERT OR IGNORE INTO squidLog(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status) VALUES(?,?,?,?,?,?,?,?,?)";
+      try (Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)) {
+          pst.setString(1,leDate);
+          pst.setString(2,lheure);
+          pst.setString(3,IPConnectee);
+          pst.setString(4,service);
+          pst.setString(5,salle);
+          pst.setString(6,state);
+          pst.executeUpdate();
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+       
+}
         
 
     //}
