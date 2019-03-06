@@ -43,6 +43,9 @@ public class LogApache2 extends Logs{
 				sizeResponse=chaine2[2].split("\\s+")[1];
 				refererUrl=chaine2[3];
 				userAgent=chaine2[5].split("\\s+")[0];
+				
+				//Add into apacheLog table in database
+				Principale.insertApache(laDate, leTemps, username, identity, requestType, codeStatus, sizeResponse, refererUrl, userAgent);
 				lineRead= reader.readLine();
 			}
 			
