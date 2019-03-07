@@ -1,3 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package server;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +30,7 @@ public class LogSamba extends Logs {
 	
 	
 	
-	public LogSamba(){
+	/*public LogSamba(){
 		super();
 		this.leDate=DEFAULTSTRING;
 		this.lheure=DEFAULTSTRING;
@@ -34,7 +41,7 @@ public class LogSamba extends Logs {
 		this.state=DEFAULTSTRING;
 	
 
-	}
+	}*/
 	
 	public LogSamba(String leDate,String lheure,String IPConnectee,String service,String user,String salle,String state){
 		this.leDate=leDate;
@@ -80,7 +87,7 @@ public class LogSamba extends Logs {
 	        	String properUser;
 	        	String properSalle;
 	        	String properState;
-	        	PrintWriter writer = new PrintWriter("/home/rtel/etu/rt2017/bh617745/M4210/JavaProject/src/test", "UTF-8");
+	        	//PrintWriter writer = new PrintWriter("/home/rtel/etu/rt2017/bh617745/M4210/JavaProject/src/test", "UTF-8");
 	        	
 	        	
 	            String lineRead= reader.readLine();
@@ -141,9 +148,9 @@ public class LogSamba extends Logs {
 	    	    	            		
 	    	    	            	}
 		    	                	LogSamba firstlog = new LogSamba(properYear,properTime,properIP,properService,properUser,properSalle,properState);
-		    		                System.out.println("The user "+firstlog.user+" / "+firstlog.IPConnectee+" "+firstlog.state+" son connection au service "+ firstlog.service+" au salle "+firstlog.salle+" au date "+" "+firstlog.leDate+" "+firstlog.lheure);
-		    	            		writer.println("The user "+firstlog.user+" / "+firstlog.IPConnectee+" "+firstlog.state+" son connection au service "+ firstlog.service+" au salle "+firstlog.salle+" au date "+" "+firstlog.leDate+" "+firstlog.lheure);
-						Principale.insertSamba(firstlog.leDate,firstlog.lheure,firstlog.IPConnectee,firstlog.service,firstlog.user,firstlog.salle,firstlog.state)
+		    		                //System.out.println("The user "+firstlog.user+" / "+firstlog.IPConnectee+" "+firstlog.state+" son connection au service "+ firstlog.service+" au salle "+firstlog.salle+" au date "+" "+firstlog.leDate+" "+firstlog.lheure);
+		    	            		//writer.println("The user "+firstlog.user+" / "+firstlog.IPConnectee+" "+firstlog.state+" son connection au service "+ firstlog.service+" au salle "+firstlog.salle+" au date "+" "+firstlog.leDate+" "+firstlog.lheure);
+						Principale.insertSamba(firstlog.leDate,firstlog.lheure,firstlog.IPConnectee,firstlog.service,firstlog.user,firstlog.salle,firstlog.state);
 	    	                		}
 	    	                }
 	            	
@@ -169,6 +176,8 @@ public class LogSamba extends Logs {
 	        }
 	    }
 	    public static void main(String[] args) {//testons notre methode squidProcess
-	        sambaProcess("/home/rtel/etu/rt2017/bh617745/M4210/JavaProject/src/exemple.samba.access.log.txt");
+	        sambaProcess("exemple.samba.host.log.txt");
 	}
 }
+
+

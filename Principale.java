@@ -13,9 +13,6 @@ import java.sql.*;
 /**
  *
  * @author freddy
- * @author irfan
- * @author haiqal
- * @author tom
  */
 public class Principale {
     
@@ -57,6 +54,18 @@ public static void connectToDatabase(){
             }
         }*/
 }
+
+public static Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:test.db";
+        Connection connex = null;
+        try {
+            connex = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return connex;
+    }
 public static void createNewTableServer(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
@@ -72,20 +81,18 @@ public static void createNewTableServer(){
         }
 }
 
-
-//Create Apache table 
  public static void createNewTableApache(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS apacheLog (\n"
                 + "	id integer PRIMARY KEY NOT NULL,\n"
                 + "	date text NOT NULL,\n"
-                + "	temps text NOT NULL\n"
-                + "	username text NOT NULL\n"
-                + "	identity text NOT NULL\n"
-                + "	requestType text NOT NULL\n"
-                + "	codeStatus text NOT NULL\n"
-                + "	sizeResponse text NOT NULL\n"
-                + "	refererUrl text NOT NULL\n"
+                + "	temps text NOT NULL,\n"
+                + "	username text NOT NULL,\n"
+                + "	identity text NOT NULL,\n"
+                + "	requestType text NOT NULL,\n"
+                + "	codeStatus text NOT NULL,\n"
+                + "	sizeResponse text NOT NULL,\n"
+                + "	refererUrl text NOT NULL,\n"
                 + "	userAgent text NOT NULL\n"
                 + ");";
         try (Connection connex = DriverManager.getConnection(url);
@@ -110,15 +117,14 @@ public static void createNewTableServer(){
 		 pst.setString(7, sizeResponse);
 		 pst.setString(8, refererUrl);
 		 pst.setString(9, userAgent);
+                 pst.executeUpdate();
 		 
 	 }
 	 catch (SQLException e) {
          System.out.println(e.getMessage());
      }
  }
-
-  
- //Create squid table
+   
   public static void createNewTableSquid(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
@@ -140,18 +146,6 @@ public static void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
-  
-public static Connection connect() {
-        // SQLite connection string
-        String url = "jdbc:sqlite:test.db";
-        Connection connex = null;
-        try {
-            connex = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return connex;
-    }
 
 //Fonction permettant d'inserer des informations dans la table du Log Squid
  public static void insertSquid(String remoteHost, String dateExacte, String url,String peerHost, String bytes,String contentType, String duration,String requestMethod, String status){
@@ -174,42 +168,47 @@ public static Connection connect() {
          
  }
 
- //Function to create ssh log table
-  public static void createNewTableSSH(){
-        String url = "jdbc:sqlite:test.db";
-        String sql = "CREATE TABLE IF NOT EXISTS sshLog (\n"
-                + "	id integer PRIMARY KEY NOT NULL,\n"
-                + "	date text NOT NULL,\n"
-                + "	temps text NOT NULL,\n"
-                + "	server text NOT NULL\n"
-                + "	typeConnection text NOT NULL,\n"
-                + "	session text NOT NULL,\n"
-                + ");";
-        try (Connection connex = DriverManager.getConnection(url);
-                Statement st = connex.createStatement()) {
-                st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+ public static void createNewTableSamba(){
+	String url = "jdbc:sqlite:test.db";
+        String sql = "CREATE TABLE IF NOT EXISTS sambaLog (\n"
+              + " id integer PRIMARY KEY NOT NULL,\n"
+              + " leDate text NOT NULL,\n"
+              + " lheure text NOT NULL,\n"
+              + " IPConnectee text NOT NULL,\n"
+              + " service text NOT NULL,\n"
+              + " user text NOT NULL,\n"
+              + " salle text NOT NULL,\n"
+              + " state text NOT NULL\n"
+              + ");";
+      try (Connection connex = DriverManager.getConnection(url);
+              Statement st = connex.createStatement()) {
+              st.execute(sql);
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+     
 }
-   
-  //Function to insert information into ssh table
-  public static void insertSsh(String date, String temps, String server, String typeConnection, String session) {
-		 String link= "jdbc:sqlite:test.db";
-		 String sql = "INSERT OR IGNORE INTO sshLog(date, temps, server, typeConnection, session) VALUES(?,?,?,?,?)";
-		 try(Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)){
-			 pst.setString(1, date);
-			 pst.setString(2, temps);
-			 pst.setString(3, server);
-			 pst.setString(4, typeConnection);
-			 pst.setString(5, session);
-			 
-		 }
-		 catch (SQLException e) {
-	         System.out.println(e.getMessage());
-	     }
-	 }
-  
+ 
+ public static void insertSamba(String leDate, String lheure,String IPConnectee, String service, String user,String salle, String state){
+      String link= "jdbc:sqlite:test.db";
+      String sql ="INSERT OR IGNORE INTO sambaLog(leDate,lheure,IPConnectee,service,user,salle,state) VALUES(?,?,?,?,?,?,?)";
+      try (Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)) {
+          pst.setString(1,leDate);
+          pst.setString(2,lheure);
+          pst.setString(3,IPConnectee);
+          pst.setString(4,service);
+          pst.setString(5,user);
+          pst.setString(6,salle);
+          pst.setString(7,state);
+          pst.executeUpdate();
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+       
+}
+
+
+    
     public static  void insertServer(String url, String serverName){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO servers(url, serverName) VALUES(?,?)";
@@ -222,42 +221,6 @@ public static Connection connect() {
         }
          
  }
-
- public static void createNewTableSamba(){
-	  String url = "jdbc:sqlite:test.db";
-      String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
-              + "	id integer PRIMARY KEY NOT NULL,\n"
-              + "	leDate text NOT NULL,\n"
-              + "	lheure text NOT NULL,\n"
-              + " IPConnectee text NOT NULL,\n"
-              + " service text NOT NULL,\n"
-              + " salle text NOT NULL,\n"
-              + " date text NOT NULL,\n"
-              + ");";
-      try (Connection connex = DriverManager.getConnection(url);
-              Statement st = connex.createStatement()) {
-              st.execute(sql);
-      } catch (SQLException e) {
-          System.out.println(e.getMessage());
-      }
-     
-}
-  public static void insertSamba(String leDate, String lheure,String IPConnectee, String service,String salle, String state){
-      String link= "jdbc:sqlite:test.db";
-      String sql ="INSERT OR IGNORE INTO sambaLog(leDate,lheure,IPConnectee,service,salle,state) VALUES(?,?,?,?,?,?)";
-      try (Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)) {
-          pst.setString(1,leDate);
-          pst.setString(2,lheure);
-          pst.setString(3,IPConnectee);
-          pst.setString(4,service);
-          pst.setString(5,salle);
-          pst.setString(6,state);
-          pst.executeUpdate();
-      } catch (SQLException e) {
-          System.out.println(e.getMessage());
-      }
-       
-}
         
 
     //}
@@ -277,6 +240,8 @@ public static Connection connect() {
         connectToDatabase();
         createNewTableServer();
         createNewTableSquid();
+        createNewTableApache();
+        createNewTableSamba();
               
         
         /*
