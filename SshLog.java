@@ -23,16 +23,16 @@ public static void apacheProcess(String file) {
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			lineRead=reader.readLine();
 			while(lineRead !=null) {
-				splitLine=lineRead.split(": ");
+				splitLine=lineRead.split("]: ");
 				chaine1= splitLine[0].split("\\s+");
 				laDate=chaine1[0] + chaine1[1];
 				leTemps=chaine1[2];
 				nomServer=chaine1[3];
-				typeConnection=chaine1[4];
+				typeConnection=chaine1[4]+"]";
 				session=splitLine[1];
 				
-				//System.out.println(splitLine[1]);
-				//System.out.println(chaine1[4]);
+				//Ajout dans la table sshLog
+				Principale.insertSsh(laDate, leTemps, nomServer, typeConnection, session);
 				lineRead= reader.readLine();
 			}
 			
