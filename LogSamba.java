@@ -95,9 +95,8 @@ public class LogSamba extends Logs {
 	            while (lineRead != null){
 	            	splitLine=lineRead.split("\\s+");
 	            	if(splitLine.length>2 && splitLine.length<8){
-	            		Pattern p = Pattern.compile("0.?");
-	            		Matcher m = p.matcher(splitLine[2]);
-	            			if(m.find()){
+	            		        wordFinderResult=wordFinder("0.?",splitLine[2]);
+	            			if(wordFinderResult){
 	            				lineRead= reader.readLine();
 
 	            			}
@@ -106,9 +105,8 @@ public class LogSamba extends Logs {
 
 
 
-	            				p = Pattern.compile("\\[.+/.+/.+\\]");
-	            				m = p.matcher(lineRead);
-	            				if(m.find()){
+	            			
+	            				if(wordFinder("\\[.+/.+/.+\\]",(lineRead))){
 	            					StringBuilder sb = new StringBuilder(splitLine[0]);
 	            					StringBuilder sb1 = new StringBuilder(splitLine[1]);
 	            					System.out.println(splitLine[0]);
@@ -121,19 +119,18 @@ public class LogSamba extends Logs {
 		                		
 			                
 	            					lineRead= reader.readLine();
-	            					p = Pattern.compile("rt[1-9].+");
-	            					m = p.matcher(lineRead);
-	            					if(m.find()){
+	            					wordFinderResult=wordFinder("rt[1-9].+",lineRead);
+
+	            					if(wordFinderResult){
 	            						splitLine=lineRead.split("\\s+");
 	            						properSalle=splitLine[1];
-	            						p = Pattern.compile("closed");
-	            						m = p.matcher(splitLine[3]);
-	    	    	            		splitLine1=splitLine[2].split(":");
-	    	    	                	String properIP = splitLine1[3].substring(0, splitLine1[3].length() - 1);
+	            						wordFinderResult=wordFinder("closed",splitLine[3]);
+	    	    	            				splitLine1=splitLine[2].split(":");
+	    	    	                			String properIP = splitLine1[3].substring(0, splitLine1[3].length() - 1);
 
 
 
-	    	    	            	if(m.find()){
+	    	    	            	if(wordFinderResult){
 	    	    	            		properState=splitLine[3];
 	    	    	            		properUser="";
 	    	    	            		properService=splitLine[7];
@@ -161,7 +158,7 @@ public class LogSamba extends Logs {
 
 	            	}
 	                lineRead= reader.readLine();
-	                }
+	               }
 	            
 	                  
 	            	 
@@ -175,6 +172,17 @@ public class LogSamba extends Logs {
 	            System.out.println(e.getMessage());
 	        }
 	    }
+	 public static boolean wordFinder(String pattern,String word){
+		 Pattern p = Pattern.compile(pattern);
+		 Matcher m = p.matcher(word);
+		 if(m.find()){
+			 return true;
+		 }
+		 else{
+			 return false;
+		 }
+		 
+	 }
 	    public static void main(String[] args) {//testons notre methode squidProcess
 	        sambaProcess("exemple.samba.host.log.txt");
 	}
