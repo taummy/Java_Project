@@ -206,6 +206,41 @@ public static void createNewTableServer(){
       }
        
 }
+	//Function to create ssh log table
+  public static void createNewTableSSH(){
+        String url = "jdbc:sqlite:test.db";
+        String sql = "CREATE TABLE IF NOT EXISTS sshLog (\n"
+                + "	id integer PRIMARY KEY NOT NULL,\n"
+                + "	date text NOT NULL,\n"
+                + "	temps text NOT NULL,\n"
+                + "	server text NOT NULL\n"
+                + "	typeConnection text NOT NULL,\n"
+                + "	session text NOT NULL,\n"
+                + ");";
+        try (Connection connex = DriverManager.getConnection(url);
+                Statement st = connex.createStatement()) {
+                st.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+}
+   
+  //Function to insert information into ssh table
+  public static void insertSsh(String date, String temps, String server, String typeConnection, String session) {
+		 String link= "jdbc:sqlite:test.db";
+		 String sql = "INSERT OR IGNORE INTO sshLog(date, temps, server, typeConnection, session) VALUES(?,?,?,?,?)";
+		 try(Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)){
+			 pst.setString(1, date);
+			 pst.setString(2, temps);
+			 pst.setString(3, server);
+			 pst.setString(4, typeConnection);
+			 pst.setString(5, session);
+			 
+		 }
+		 catch (SQLException e) {
+	         System.out.println(e.getMessage());
+	     }
+	 }
 
 
     
