@@ -244,7 +244,7 @@ public static Connection connect() {
 }
   public static void insertSamba(String leDate, String lheure,String IPConnectee, String service,String salle, String state){
       String link= "jdbc:sqlite:test.db";
-      String sql ="INSERT OR IGNORE INTO sambaLog(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status) VALUES(?,?,?,?,?,?,?,?,?)";
+      String sql ="INSERT OR IGNORE INTO sambaLog(leDate,lheure,IPConnectee,service,salle,state) VALUES(?,?,?,?,?,?)";
       try (Connection connex = Principale.connect();PreparedStatement pst = connex.prepareStatement(sql)) {
           pst.setString(1,leDate);
           pst.setString(2,lheure);
