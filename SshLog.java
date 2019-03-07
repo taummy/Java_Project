@@ -19,7 +19,7 @@ public class SshLog extends Logs{
 	public static String[] chaine1, chaine2;
 	public static String[] splitLine, tabC1;
 	
-public static void apacheProcess(String file) {
+public static void sshProcess(String file) {
 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			lineRead=reader.readLine();
