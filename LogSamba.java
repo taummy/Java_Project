@@ -66,6 +66,10 @@ public class LogSamba extends Logs {
 		return service;
 		
 	}
+	public String getUser(){
+		return user;
+		
+	}
 	public String getSalle(){
 		return salle;
 		
@@ -106,11 +110,10 @@ public class LogSamba extends Logs {
 
 
 	            			
-	            				if(wordFinder("\\[.+/.+/.+\\]",(lineRead))){
+	            				if(wordFinder("\\[.+/.+/.+\\]",lineRead)){
 	            					StringBuilder sb = new StringBuilder(splitLine[0]);
 	            					StringBuilder sb1 = new StringBuilder(splitLine[1]);
-	            					System.out.println(splitLine[0]);
-	            					System.out.println(splitLine[1]);
+	            			
 
 	            					sb.deleteCharAt(0);
 	            					sb1.deleteCharAt(8);
