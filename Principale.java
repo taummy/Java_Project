@@ -206,16 +206,17 @@ public static void createNewTableServer(){
       }
        
 }
-	//Function to create ssh log table
+
+ 	//Function to create ssh log table
   public static void createNewTableSSH(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS sshLog (\n"
                 + "	id integer PRIMARY KEY NOT NULL,\n"
                 + "	date text NOT NULL,\n"
                 + "	temps text NOT NULL,\n"
-                + "	server text NOT NULL\n"
+                + "	server text NOT NULL,\n"
                 + "	typeConnection text NOT NULL,\n"
-                + "	session text NOT NULL,\n"
+                + "	session text NOT NULL\n"
                 + ");";
         try (Connection connex = DriverManager.getConnection(url);
                 Statement st = connex.createStatement()) {
@@ -235,12 +236,14 @@ public static void createNewTableServer(){
 			 pst.setString(3, server);
 			 pst.setString(4, typeConnection);
 			 pst.setString(5, session);
+                         pst.executeUpdate();
 			 
 		 }
 		 catch (SQLException e) {
 	         System.out.println(e.getMessage());
 	     }
 	 }
+
 
 
     
@@ -277,6 +280,7 @@ public static void createNewTableServer(){
         createNewTableSquid();
         createNewTableApache();
         createNewTableSamba();
+        createNewTableSSH();
               
         
         /*
