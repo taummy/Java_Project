@@ -39,8 +39,8 @@ public class LogApache2 extends Logs{
 				leTemps=((chaine1[3].split("/"))[2]).substring(5) + " " + chaine1[4]; //le temps avec +UTC
 				chaine2=splitLine[1].split("\"");
 				requestType=chaine2[1];
-				codeStatus=chaine2[2].split("\\s+")[0];
-				sizeResponse=chaine2[2].split("\\s+")[1];
+				codeStatus=chaine2[2].split("\\s+")[1];
+				sizeResponse=chaine2[2].split("\\s+")[2];
 				refererUrl=chaine2[3];
 				userAgent=chaine2[5].split("\\s+")[0];
 				
