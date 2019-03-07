@@ -43,9 +43,9 @@ public static void apacheProcess(String file) {
         }
 	}
 	
-	//testons notre methode apacheProcess
+	//testons notre methode sshProcess
 	public static void main(String[] args) {
-		apacheProcess("exemple.linux.auth.sshd.log.txt");
+		sshProcess("exemple.linux.auth.sshd.log.txt");
 	}
 
 }
