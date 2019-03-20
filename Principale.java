@@ -21,9 +21,10 @@ public class Principale {
     //Let's implement the database
     
     //Creation of the database and connection
-    //Our database will hold 5 tables : 1 for Servers, and 4  for the different Log chld classes
+    //Our database will hold 5 tables : 1 for Servers, and 4  for the different Log child classes
 public void createNewDatabase(String dbName) {
     
+	//Creation of the database\\
     String link="jdbc:sqlite:"+dbName;         
     try(Connection connex = DriverManager.getConnection(link)){
        if(connex != null){
@@ -36,6 +37,7 @@ public void createNewDatabase(String dbName) {
         System.out.println(e.getMessage());
     }
 }
+	//Connection to the Database\\
 public void connectToDatabase(){
         Connection conn = null;
         try {
@@ -62,12 +64,14 @@ public Connection connect() {
         String url = "jdbc:sqlite:test.db";
         Connection connex = null;
         try {
-            connex = DriverManager.getConnection(url);
+            connex = DriverManager.getConnection(url); //"DriverManager" will load the driver classes "dbc:sqlite:test.db"
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return connex;
     }
+	
+	//Creation of new tables in the database\\
 public void createNewTableServer(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
@@ -82,6 +86,7 @@ public void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
+	//Add of new server to the database\\
 public  void insertServer(String url, String serverName){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO servers(url, serverName) VALUES(?,?)";
@@ -95,7 +100,7 @@ public  void insertServer(String url, String serverName){
          
  }
 
-
+	//Creation of the table for the Apache log with all the good rows\\
  public void createNewTableApache(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS apacheLog (\n"
@@ -139,7 +144,7 @@ public  void insertServer(String url, String serverName){
          System.out.println(e.getMessage());
      }
  }
-   
+   	//Creation of the table for the Squid log with all the good rows\\
   public void createNewTableSquid(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
@@ -162,7 +167,7 @@ public  void insertServer(String url, String serverName){
         }
 }
 
-//Fonction permettant d'inserer des informations dans la table du Log Squid
+//Function to insert information into Squid table
  public void insertSquid(String remoteHost, String dateExacte, String url,String peerHost, String bytes,String contentType, String duration,String requestMethod, String status){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO squidLog(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -182,7 +187,7 @@ public  void insertServer(String url, String serverName){
         }
          
  }
-
+	//Creation of the table for the Samba log with all the good rows\\
  public void createNewTableSamba(){
 	String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS sambaLog (\n"
@@ -203,7 +208,7 @@ public  void insertServer(String url, String serverName){
       }
      
 }
- 
+ 	//Function to insert information into Samba table
  public void insertSamba(String leDate, String lheure,String IPConnectee, String service, String user,String salle, String state){
       String link= "jdbc:sqlite:test.db";
       String sql ="INSERT OR IGNORE INTO sambaLog(leDate,lheure,IPConnectee,service,user,salle,state) VALUES(?,?,?,?,?,?,?)";
@@ -222,7 +227,7 @@ public  void insertServer(String url, String serverName){
        
 }
 
- 	//Function to create ssh log table
+ 	//Creation of the table for the SSH log with all the good rows\\
   public void createNewTableSSH(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS sshLog (\n"
@@ -274,6 +279,7 @@ public  void insertServer(String url, String serverName){
      //WE CAN ALSO TRY THE toArray() METHOD IF THIS ISN'T WORKING
     
     //}
+	//\\
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Principale pl;
