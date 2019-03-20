@@ -11,6 +11,8 @@ import java.io.*;
  *
  * @author freddy
  */
+
+	//Main class for the server\\
 public class Server {
 
     /**
@@ -23,18 +25,19 @@ public class Server {
     public Server(Principale p){
         princ=p;
     }
-    //constructeur par defaut 
+    //Default constructor 
     public Server(){
         
         url="";
         serverName="";
     }
-    //constructeur avec tous les parametres
+    //constructor with parameters
     public Server(String link, String name){
         url=link;
         serverName=name;
     }
-    //accessseurs
+	//Accesseurs\\
+    //Setteurs
     public void setUrl(String newUrl){
         url=newUrl;
         
@@ -42,6 +45,7 @@ public class Server {
     public void setServerName(String newName){
         serverName=newName;
     }
+	//Getteur
     public String getUrl(){
         return url;
     }
