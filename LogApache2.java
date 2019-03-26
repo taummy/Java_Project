@@ -52,7 +52,7 @@ public class LogApache2 extends Logs{
 	
 	public void apacheProcess(String file) {
 		
-		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+		try(BufferedReader reader = new BufferedReader(new FileReader(file))){ //On utilise BufferedReader afin de lire le fichier
 			lineRead=reader.readLine();
 			while(lineRead !=null) {
 				splitLine=lineRead.split("]");
