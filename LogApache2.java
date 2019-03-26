@@ -15,7 +15,9 @@ import java.text.*;
 
 public class LogApache2 extends Logs{
 	
-	//Creation of variable for data parsing
+	//----------------------------------------------------------//
+      	//  Start creating a few objects and variables we'll need.  //
+      	//--------------------------------------------------------- //
 	public String laDate;
 	public String leTemps; // the date and time the request was received.
 	public String username; // user name determined by HTTP authentication
@@ -29,13 +31,15 @@ public class LogApache2 extends Logs{
 	public String[] chaine1, chaine2;
 	public String[] splitLine, tabC1;
 	
-	//Creation of variable of class Princiaple
+	//Creation of variable of class Princiapale
 	private Principale princ;
         public LogApache2(Principale p){
         princ=p;
         }
         
-	//Constructor by default
+	//-------------------------------------------------------//
+      	//  Creating constructor by default and with factors	//
+      	//---------------------------------------------------- //
         public LogApache2(){
             remoteHost="";
             laDate="";
@@ -64,7 +68,9 @@ public class LogApache2 extends Logs{
             
         }
 	
-	//Reading accesors
+	//--------------------------------------------------------------//
+      	//  Creating accessors for each variables, will be used in GUI  //
+      	//--------------------------------------------------------------//
         public String getLaDate(){
             return laDate;
         }
@@ -93,8 +99,10 @@ public class LogApache2 extends Logs{
             return userAgent;
         }
         
+	//----------------------------------------------------------------------------//
+      	//  Function for data parsing and the name of file as factor of the function  //
+      	//--------------------------------------------------------------------------- //
 	
-	//Function for data parsing and the name of file as factor of the function
 	public void apacheProcess(String file) {
 		
 		//use BufferedReader to read file
