@@ -15,6 +15,7 @@ import java.text.*;
 
 public class SshLog extends Logs{
 	
+	//Creation of variables for data parsing
 	public String laDate; //Date 
 	public String leTemps; //Running time
 	public String nomServer; //Server name
