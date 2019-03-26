@@ -15,8 +15,7 @@ import java.text.*;
 
 public class LogApache2 extends Logs{
 	
-	//variable privee
-	public String remoteHost; // @IP of client
+	//Creation of variable for data parsing
 	public String laDate;
 	public String leTemps; // the date and time the request was received.
 	public String username; // user name determined by HTTP authentication
@@ -27,14 +26,16 @@ public class LogApache2 extends Logs{
 	public String refererUrl; // the URL of the page from which this request was initiated) if any is present, and "-" otherwise
 	public String userAgent; // the browser identification string
 	public String lineRead;
-	public String line;
 	public String[] chaine1, chaine2;
 	public String[] splitLine, tabC1;
+	
+	//Creation of variable of class Princiaple
 	private Principale princ;
         public LogApache2(Principale p){
         princ=p;
         }
         
+	//Constructor by default
         public LogApache2(){
             remoteHost="";
             laDate="";
@@ -49,6 +50,7 @@ public class LogApache2 extends Logs{
             lineRead="";
         }
         
+	//Constructor with factors
         public LogApache2(String date, String temps, String username, String identity, String requestType, String codeStatus, String sizeResponse, String refererUrl, String userAgent){
             this.laDate=date;
             this.leTemps=temps;
@@ -61,6 +63,8 @@ public class LogApache2 extends Logs{
             this.userAgent=userAgent;
             
         }
+	
+	//Reading accesors
         public String getLaDate(){
             return laDate;
         }
@@ -90,40 +94,41 @@ public class LogApache2 extends Logs{
         }
         
 	
-	
+	//Function for data parsing and the name of file as factor of the function
 	public void apacheProcess(String file) {
 		
+		//use BufferedReader to read file
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			lineRead=reader.readLine();
 			while(lineRead !=null) {
 				splitLine=lineRead.split("]");
 				chaine1=splitLine[0].split("\\s+");
-				remoteHost=chaine1[0]; //@IP du client
 				identity=chaine1[1]; //identity
-				username=chaine1[2];
+				username=chaine1[2]; //username
 				laDate=((chaine1[3].split(":"))[0]).substring(1); //la date
 				leTemps=((chaine1[3].split("/"))[2]).substring(5) + " " + chaine1[4]; //le temps avec +UTC
 				chaine2=splitLine[1].split("\"");
-				requestType=chaine2[1];
-				codeStatus=chaine2[2].split("\\s+")[1];
-				sizeResponse=chaine2[2].split("\\s+")[2];
-				refererUrl=chaine2[3];
-				userAgent=chaine2[5].split("\\s+")[0];
+				requestType=chaine2[1]; //type of request 
+				codeStatus=chaine2[2].split("\\s+")[1]; //status of code
+				sizeResponse=chaine2[2].split("\\s+")[2]; //size of response
+				refererUrl=chaine2[3]; 			//referer url if it exists
+				userAgent=chaine2[5].split("\\s+")[0];	//type of browser used by the user
 				
 				//Add into apacheLog table in database
+				//Called a function using an object class Principale. Take all the data in variables as factors in insertApache.
 				princ.insertApache(laDate, leTemps, username, identity, requestType, codeStatus, sizeResponse, refererUrl, userAgent);
 				lineRead= reader.readLine();
 			}
 			
 					
 		}
-		
+		//show error message
 		catch(IOException e){
             System.out.println(e.getMessage());
         }
 	}
 	
-	//testons notre methode apacheProcess
+	//Try apacheProcess
 	public static void main(String[] args) {
         Principale p;
         p= new Principale();
