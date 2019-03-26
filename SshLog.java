@@ -40,6 +40,30 @@ public class SshLog extends Logs{
             lineRead="";
             line="";
         }
+        public SshLog(String laDate,String leTemps,String nomServer, String typeConnection,String session){
+            this.laDate=laDate;
+            this.leTemps=leTemps;
+            this.nomServer=nomServer;
+            this.typeConnection=typeConnection;
+            this.session=session;
+        }
+        public String getDate(){
+            return laDate;
+        }
+        public String getTemps(){
+            return leTemps;
+        }
+        public String getNomServer(){
+            return nomServer;
+        }
+        public String getTypeConnection(){
+            return typeConnection;
+        }
+        public String getSession(){
+            return session;
+        }
+        
+        
 	
 public void sshProcess(String file) {
 		

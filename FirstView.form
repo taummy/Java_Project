@@ -142,6 +142,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="view1welcometext">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="82" green="8e" red="9a" type="rgb"/>
             </Property>

@@ -12,7 +12,6 @@ import java.util.ArrayList;
  *
  * @author freddy
  */
-    //Main class for the server\\
 public class Server {
 
     /**
@@ -25,20 +24,18 @@ public class Server {
     public Server(Principale p){
         princ=p;
     }
-    //Default constructor 
+    //constructeur par defaut 
     public Server(){
         
         url="";
         serverName="";
     }
-    //Constructor with parameters
+    //constructeur avec tous les parametres
     public Server(String link, String name){
         url=link;
         serverName=name;
     }
-    //Accesseurs\\
-    
-    //Setteurs
+    //accessseurs
     public void setUrl(String newUrl){
         url=newUrl;
         
@@ -46,14 +43,13 @@ public class Server {
     public void setServerName(String newName){
         serverName=newName;
     }
-    //Getteurs
     public String getUrl(){
         return url;
     }
     public String getServerName(){
         return serverName;
     }
-       //Use of an "ArrayList" in order to display the list of logs 
+       
      public ArrayList<String> listlogs (String url) {
       ArrayList<String> logList = new ArrayList<String>();
 
@@ -158,7 +154,7 @@ public class Server {
         //Server web = new Server("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/","serveur web");
         Server srv;
         srv = new Server();
-        //srv.listlogs("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/");
+        srv.listlogs("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/");
         ArrayList<String> l = new ArrayList<String>(srv.listlogs("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/"));
         for (String log : l){
             System.out.println(log);

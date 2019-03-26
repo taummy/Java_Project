@@ -5,12 +5,16 @@
  */
 package server;
 import java.*;
-import javax.*;
+import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author freddy
  */
-public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of graphical interface 
+public class SecondView extends javax.swing.JFrame {
+
 
     /**
      * Creates new form SecondView
@@ -34,7 +38,7 @@ public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        //There is the component we are using in our windows
+
         jScrollPane2 = new javax.swing.JScrollPane();
         view1servertext = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,10 +46,8 @@ public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of 
         view2nextbutton = new javax.swing.JButton();
         view2exitbutton = new javax.swing.JButton();
 
-        //Exit button
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        //Text zones
         view1servertext.setEditable(false);
         view1servertext.setBackground(new java.awt.Color(154, 142, 130));
         view1servertext.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, null, new java.awt.Color(207, 16, 16)));
@@ -55,7 +57,6 @@ public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of 
 
         jScrollPane1.setViewportView(view2LogsList);
 
-        //Next button
         view2nextbutton.setBackground(new java.awt.Color(237, 172, 84));
         view2nextbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/server/next.png"))); // NOI18N
         view2nextbutton.setText("            Next");
@@ -115,35 +116,66 @@ public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of 
 
     private void view2nextbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_view2nextbuttonActionPerformed
         // TODO add your handling code here:
+        ThirdView thirdview = new ThirdView();
+        DefaultListModel dlm3 = new DefaultListModel();
+        //String[] params;
+        
         String selectedLog = view2LogsList.getSelectedValue();
+        thirdview.logType=selectedLog;
         
         l.createLogsFiles(selectedLog);
         
-
+        
         switch(selectedLog){
             case "exemple.apache2.access.log":
+                String[] paramsApache = {"date","username","codeStatus", "userAgent"};
+                DefaultComboBoxModel dcbmApache = new DefaultComboBoxModel(paramsApache);
+                thirdview.view3parameterscroller.setModel(dcbmApache);
                 apache.apacheProcess(selectedLog+".txt");
+                String[] columnNamesApache = {"Date","Heure","Username","identity","RequestType","CodeStatus","SizeResponse","RefererUrl","UserAgent"};
+                DefaultTableModel apacheModel = new DefaultTableModel(0, columnNamesApache.length);
+                apacheModel.setColumnIdentifiers(columnNamesApache);
+                thirdview.view3JTable.setModel(apacheModel);
                 break;
             case "exemple.linux.auth.sshd.log":
+                String[] paramsSsh = {"date","temps","server", "session"};
+                DefaultComboBoxModel dcbmSsh = new DefaultComboBoxModel(paramsSsh);
+                thirdview.view3parameterscroller.setModel(dcbmSsh);
                 ssh.sshProcess(selectedLog+".txt");
+                String[] columnNamesSsh = {"Date","Heure","Server","TypeConnection","Session"};
+                DefaultTableModel sshModel = new DefaultTableModel(0, columnNamesSsh.length);
+                sshModel.setColumnIdentifiers(columnNamesSsh);
+                thirdview.view3JTable.setModel(sshModel);
                 break;
                 
             case "exemple.samba.host.log":
+                String[] paramsSamba = {"leDate","lheure","IPConnectee","service","salle", "user", "state"};
+                DefaultComboBoxModel dcbmSamba = new DefaultComboBoxModel(paramsSamba);
+                thirdview.view3parameterscroller.setModel(dcbmSamba);
                 samba.sambaProcess(selectedLog+".txt");
+                String[] columnNamesSamba = {"Date","Heure","IPConnectee","Service","User","Salle","State"};
+                DefaultTableModel sambaModel = new DefaultTableModel(0, columnNamesSamba.length);
+                sambaModel.setColumnIdentifiers(columnNamesSamba);
+                thirdview.view3JTable.setModel(sambaModel);
                 break;
             
             case "exemple.squid.access.log":
+                String[] paramsSquid = {"DateExacte","Url","RemoteHost", "ContentType", "RequestMethod"};
+                DefaultComboBoxModel dcbmSquid = new DefaultComboBoxModel(paramsSquid);
+                thirdview.view3parameterscroller.setModel(dcbmSquid);
+                
                 squid.squidProcess(selectedLog+".txt");
                 break;
-        }
-        
-        
-        System.exit(0);
-
-
+        }      
                 
-        
+        /*String[] params = {"date","username","codeStatus", "userAgent"};
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel(params);
+        thirdview.view3parameterscroller.setModel(dcbm);*/
 
+        
+        
+        
+        thirdview.setVisible(true);
         
     }//GEN-LAST:event_view2nextbuttonActionPerformed
 

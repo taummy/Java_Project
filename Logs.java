@@ -22,27 +22,27 @@ public class Logs {
         public Logs(Principale p){
         princ=p;
         }  
-	 //Default constructor
+	 //constructeur par defaut 
 	public Logs() {
 		this.addrIP="";
                 this.serv="";
 	}
-	//Constructor with parameters
+	//constructeur avec tous les parametres
 	public Logs(String leServeur) {
 		this.serv=leServeur;
 	}
         
-	//Accesseurs\\
-    
-    //Setteurs
+      
+	
+	//accesseurs en lecture et ecriture
 	public void setAddrIP(String leAddrIP) {
 		this.addrIP=leAddrIP;
 	}
-	//Getteurs
+	
 	public String getAddrIP() {
 		return addrIP;
 	}
-	//Creation of a .txt file 
+	
 	public  void createLogsFiles (String url) {
 		 if ( (url==null) )
 		    {
@@ -59,14 +59,14 @@ public class Logs {
 		      u = new URL(this.serv+url);
 		      is = u.openStream();
 		      dis = new DataInputStream(new BufferedInputStream(is));
-		        File ff=new File(url+".txt"); // define the arborescence
+		        File ff=new File(url+".txt"); // définir l'arborescence
 				ff.createNewFile();
 				FileWriter ffw=new FileWriter(ff);
 		      while ((s = dis.readLine()) != null)
 		      {
 		      
-				ffw.write(s);  // Write a line in the resultat.txt file
-				ffw.write("\n"); // force the line return 
+				ffw.write(s);  // écrire une ligne dans le fichier resultat.txt
+				ffw.write("\n"); // forcer le passage à la ligne
 				
 		      }
 		      ffw.close(); // fermer le fichier à la fin des traitements

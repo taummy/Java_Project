@@ -65,6 +65,7 @@ public class FirstView extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
 
+        view1welcometext.setEditable(false);
         view1welcometext.setBackground(new java.awt.Color(154, 142, 130));
         view1welcometext.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         view1welcometext.setText("Hello and Welcome to LogMaster");
@@ -258,9 +259,9 @@ public class FirstView extends javax.swing.JFrame {
     private void deleteserverbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteserverbuttonActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        String serverName;
-        serverName = servernametextfield.getText();
-        p.deleteServer(serverName);
+        String url;
+        url = urltextfield.getText();
+        p.deleteServer(url);
     }//GEN-LAST:event_deleteserverbuttonActionPerformed
 
     private void refreshServersListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshServersListActionPerformed

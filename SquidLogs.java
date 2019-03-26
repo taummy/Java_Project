@@ -54,6 +54,57 @@ public class SquidLogs extends Logs {
         line="";
         
     }
+    public SquidLogs(String remoteHost, String dateExacte, String url, String peerHost, String bytes, String contentType, String duration, String requestMethod, String status){
+        this.remoteHost=remoteHost;
+        this.dateExacte=dateExacte;
+        this.url=url;
+        this.peerHost=peerHost;
+        this.bytes=bytes;
+        this.contentType=contentType;
+        this.duration=duration;
+        this.requestMethod=requestMethod;
+        this.status=status;
+    }
+    public String getRemoteHost(){
+        return remoteHost;
+    }
+    public String getDateExacte(){
+        return dateExacte;
+    }
+    public String getUrl(){
+        return url;
+    }
+    public String getPeerHost(){
+        return peerHost;
+    }
+    public String getBytes(){
+        return bytes;
+    }
+    public String getContentType(){
+        return contentType;
+    }
+    public String getDuration(){
+        return duration;
+    }
+    public String getRequestMethod(){
+        return requestMethod;
+    }
+    public String getStatus(){
+        return status;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
         public void squidProcess(String file){
 

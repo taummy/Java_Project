@@ -48,11 +48,52 @@ public class LogApache2 extends Logs{
             userAgent="";
             lineRead="";
         }
+        
+        public LogApache2(String date, String temps, String username, String identity, String requestType, String codeStatus, String sizeResponse, String refererUrl, String userAgent){
+            this.laDate=date;
+            this.leTemps=temps;
+            this.username=username;
+            this.identity=identity;
+            this.requestType=requestType;
+            this.codeStatus=codeStatus;
+            this.sizeResponse=sizeResponse;
+            this.refererUrl=refererUrl;
+            this.userAgent=userAgent;
+            
+        }
+        public String getLaDate(){
+            return laDate;
+        }
+        public String getLeTemps(){
+            return leTemps;
+        }
+        public String getUsername(){
+            return username;
+        }
+        public String getIdentity(){
+            return identity;
+        }
+        public String getRequestType(){
+            return requestType;
+        }
+        public String getCodeStatus(){
+            return codeStatus;
+        }
+        public String getSizeResponse(){
+            return sizeResponse;
+        }
+        public String getRefererUrl(){
+            return refererUrl;
+        }
+        public String getUserAgent(){
+            return userAgent;
+        }
+        
 	
 	
 	public void apacheProcess(String file) {
 		
-		try(BufferedReader reader = new BufferedReader(new FileReader(file))){ //On utilise BufferedReader afin de lire le fichier
+		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			lineRead=reader.readLine();
 			while(lineRead !=null) {
 				splitLine=lineRead.split("]");

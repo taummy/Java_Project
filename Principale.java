@@ -21,9 +21,7 @@ public class Principale {
     //Let's implement the database
     
     //Creation of the database and connection
-    //Our database will hold 5 tables : 1 for Servers, and 4 for the different Log child classes
-
-    //Creation of the database\\
+    //Our database will hold 5 tables : 1 for Servers, and 4  for the different Log chld classes
 public void createNewDatabase(String dbName) {
     
     String link="jdbc:sqlite:"+dbName;         
@@ -38,13 +36,12 @@ public void createNewDatabase(String dbName) {
         System.out.println(e.getMessage());
     }
 }
-    //Connection to the Database\\
 public void connectToDatabase(){
         Connection conn = null;
         try {
             
             String url = "jdbc:sqlite:test.db";
-            conn = DriverManager.getConnection(url); //"DriverManager" will load the driver classes "jdbc:sqlite:test.db"
+            conn = DriverManager.getConnection(url);
             System.out.println("Connection established !");
             
         } catch (SQLException e) {
@@ -58,11 +55,9 @@ public void connectToDatabase(){
                 System.out.println(ex.getMessage());
             }
         }*/
-                    
-
 }
 
-    //Creation of new tables in the database\\
+
 public Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:test.db";
@@ -82,8 +77,6 @@ public void disconnect(Connection c){
 
     }
 }
-
-    //Creation of new tables in the database\\
 public void createNewTableServer(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
@@ -98,7 +91,6 @@ public void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
-    //Add of new server to the database\\
 public  void insertServer(String url, String serverName){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO servers(url, serverName) VALUES(?,?)";
@@ -111,14 +103,14 @@ public  void insertServer(String url, String serverName){
         }
          
  }
-public void deleteServer(String name) {
-        String sql = "DELETE FROM servers WHERE serverName = ?";
+public void deleteServer(String url) {
+        String sql = "DELETE FROM servers WHERE url = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
             // set the corresponding param
-            pstmt.setString(1, name);
+            pstmt.setString(1, url);
             // execute the delete statement
             pstmt.executeUpdate();
  
@@ -145,7 +137,7 @@ public ArrayList<Server> printServers(){
         return serversList;
     }
 
-    //Creation of the table for the Apache log with all the good rows\\
+
  public void createNewTableApache(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS apacheLog (\n"
@@ -168,7 +160,7 @@ public ArrayList<Server> printServers(){
         }
 }
 
-    //Function to insert information into Apache table
+//Function to insert information to Apache Log table
  public void insertApache(String date, String temps, String username, String identity, String requestType, String codeStatus, String sizeResponse, String refererUrl, String userAgent) {
 	 String link= "jdbc:sqlite:test.db";
 	 String sql = "INSERT OR IGNORE INTO apacheLog(date, temps, username, identity, requestType, codeStatus, sizeResponse, refererUrl, userAgent) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -189,7 +181,7 @@ public ArrayList<Server> printServers(){
          System.out.println(e.getMessage());
      }
  }
-    //Creation of the table for the Squid log with all the good rows\\
+   
   public void createNewTableSquid(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS squidLog (\n"
@@ -212,7 +204,7 @@ public ArrayList<Server> printServers(){
         }
 }
 
-    //Function to insert information into Squid table
+//Fonction permettant d'inserer des informations dans la table du Log Squid
  public void insertSquid(String remoteHost, String dateExacte, String url,String peerHost, String bytes,String contentType, String duration,String requestMethod, String status){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO squidLog(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -232,7 +224,7 @@ public ArrayList<Server> printServers(){
         }
          
  }
-    //Creation of the table for the Samba log with all the good rows\\
+
  public void createNewTableSamba(){
 	String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS sambaLog (\n"
@@ -253,7 +245,7 @@ public ArrayList<Server> printServers(){
       }
      
 }
-    //Function to insert information into Samba table
+ 
  public void insertSamba(String leDate, String lheure,String IPConnectee, String service, String user,String salle, String state){
       String link= "jdbc:sqlite:test.db";
       String sql ="INSERT OR IGNORE INTO sambaLog(leDate,lheure,IPConnectee,service,user,salle,state) VALUES(?,?,?,?,?,?,?)";
@@ -272,7 +264,7 @@ public ArrayList<Server> printServers(){
        
 }
 
- 	//Creation of the table for the SSH log with all the good rows\\
+ 	//Function to create ssh log table
   public void createNewTableSSH(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS sshLog (\n"
@@ -308,6 +300,40 @@ public ArrayList<Server> printServers(){
 	         System.out.println(e.getMessage());
 	     }
 	 }
+  
+  
+  /*public void view3requestMethodOnSquid(String param, String valeur){
+      String sql = ("SELECT * FROM squidLog WHERE "+param+" = '"+valeur+"'");
+        
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+             System.out.println("remoteHost \t\t dateExacte \t\t\t\t\t\t url \t\t\t\t\t\t\t\t\t peerHost \t\t bytes \t\t contentType \t\t\t duration \t\t requestMethod \t\t status");
+             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+             
+            // loop through the result set
+            while (rs.next()) {
+                System.out.print(rs.getString("remoteHost")+"\t\t");
+                System.out.print(rs.getString("dateExacte")+"\t\t");
+                System.out.print(rs.getString("url")+"\t\t");
+                System.out.print(rs.getString("peerHost")+"\t\t");
+                System.out.print(rs.getString("bytes")+"\t\t");
+                System.out.print(rs.getString("contentType")+"\t\t");
+                System.out.print(rs.getString("duration")+"\t\t");
+                System.out.print(rs.getString("requestMethod")+"\t\t\t");
+                System.out.print(rs.getString("status")+"\t\t");
+                System.out.println();
+                
+                
+                
+                
+                
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+  }*/
 
 
 
@@ -338,12 +364,12 @@ public ArrayList<Server> printServers(){
         pl.createNewTableSamba();
         pl.createNewTableSSH();
         */
-        pl.insertServer("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/","serveur web");
-        
-        ArrayList<Server> l = new ArrayList<Server>(pl.printServers());
+        //pl.insertServer("http://iutsa.unice.fr/~mgautero/ext/dut/M4210/logs/","serveur web");
+        //pl.view3requestMethodOnSquid("requestMethod", "HEAD");
+        /*ArrayList<Server> l = new ArrayList<Server>(pl.printServers());
         for (Server srv : l){
             System.out.println(srv.serverName);
-        }
+        }*:
         /*SquidLogs sl;
         sl=new SquidLogs(pl);
         LogApache2 apache;
