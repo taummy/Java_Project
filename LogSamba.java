@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 public class LogSamba extends Logs {
 	
+	//Declaration of the variables that are going to be useful for the log
 	private String leDate ;
 	private String lheure;
 	private String IPConnectee ;
@@ -33,7 +34,7 @@ public class LogSamba extends Logs {
 	
 	
 	
-	
+	//Default constructor
 	public LogSamba(){
 		//super();
 		this.leDate="";
@@ -46,7 +47,7 @@ public class LogSamba extends Logs {
 	
 
 	}
-	
+	//Constructeur with parameters
 	public LogSamba(String leDate,String lheure,String IPConnectee,String service,String user,String salle,String state){
 		this.leDate=leDate;
 		this.lheure=lheure;
@@ -57,6 +58,10 @@ public class LogSamba extends Logs {
 		this.state=state;
 	}
 	
+
+	//Acceseurs\\
+
+	//Getteurs
 	public String getDate(){
 		return leDate;
 		
@@ -80,11 +85,10 @@ public class LogSamba extends Logs {
 	}
 	
 	
-	
+	//\\
 	 public  void sambaProcess(String file){
 	        
-	        try(BufferedReader reader = new BufferedReader(new FileReader(file))){//on cree un objet BufferedReader appele reader pour lire un fichier de log qui sera passe en parametre
-	            
+	        try(BufferedReader reader = new BufferedReader(new FileReader(file))){//We are creating an BufferedReader object calling the Reader to read un log file which is given in parameter	            
 	        	String[] splitLine;
 	        	String[] splitLine1;
 	        	String properService;
@@ -93,8 +97,8 @@ public class LogSamba extends Logs {
 	        	String properState;
 	        	//PrintWriter writer = new PrintWriter("/home/rtel/etu/rt2017/bh617745/M4210/JavaProject/src/test", "UTF-8");
 	        	
-	        	
-	            String lineRead= reader.readLine();
+	        	//We are retrieving the informaions that we select to show \\
+	            String lineRead = reader.readLine();
 	            String exampleword;
 	            while (lineRead != null){
 	            	splitLine=lineRead.split("\\s+");

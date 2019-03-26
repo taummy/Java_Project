@@ -10,7 +10,7 @@ import javax.*;
  *
  * @author freddy
  */
-public class SecondView extends javax.swing.JFrame {
+public class SecondView extends javax.swing.JFrame {  //JFrame is for he use of graphical interface 
 
     /**
      * Creates new form SecondView
@@ -34,7 +34,7 @@ public class SecondView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        //There is the component we are using in our windows
         jScrollPane2 = new javax.swing.JScrollPane();
         view1servertext = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -42,8 +42,10 @@ public class SecondView extends javax.swing.JFrame {
         view2nextbutton = new javax.swing.JButton();
         view2exitbutton = new javax.swing.JButton();
 
+        //Exit button
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        //Text zones
         view1servertext.setEditable(false);
         view1servertext.setBackground(new java.awt.Color(154, 142, 130));
         view1servertext.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, null, new java.awt.Color(207, 16, 16)));
@@ -53,6 +55,7 @@ public class SecondView extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(view2LogsList);
 
+        //Next button
         view2nextbutton.setBackground(new java.awt.Color(237, 172, 84));
         view2nextbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/server/next.png"))); // NOI18N
         view2nextbutton.setText("            Next");
