@@ -15,7 +15,9 @@ import java.text.*;
 
 public class SshLog extends Logs{
 	
-	//Creation of variables for data parsing
+	//----------------------------------------------------------//
+      	//  Start creating a few objects and variables we'll need.  //
+      	//--------------------------------------------------------- //
 	public String laDate; //Date 
 	public String leTemps; //Running time
 	public String nomServer; //Server name
@@ -32,7 +34,9 @@ public class SshLog extends Logs{
             princ=p;
         }
 	
-        //Constructor by default
+        //-------------------------------------------------------//
+      	//  Creating constructor by default and with factors	//
+      	//---------------------------------------------------- //
         public SshLog(){
             laDate="";
             leTemps="";
@@ -53,7 +57,9 @@ public class SshLog extends Logs{
             this.session=session;
         }
 	
-	//Reading accesors
+	//--------------------------------------------------------------//
+      	//  Creating accessors for each variables, will be used in GUI  //
+      	//--------------------------------------------------------------//
         public String getDate(){
             return laDate;
         }
@@ -71,7 +77,9 @@ public class SshLog extends Logs{
         }
         
         
-//Function for data parsing and the name of file as factor of the function
+	//----------------------------------------------------------------------------//
+      	//  Function for data parsing and the name of file as factor of the function  //
+      	//--------------------------------------------------------------------------- //
 public void sshProcess(String file) {
 	
 		//use BufferedReader to read file
