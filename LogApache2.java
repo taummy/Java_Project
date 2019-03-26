@@ -115,7 +115,7 @@ public class LogApache2 extends Logs{
 				userAgent=chaine2[5].split("\\s+")[0];	//type of browser used by the user
 				
 				//Add into apacheLog table in database
-				//Called a function using an object class Principale. Take all the data in variables as factors in insertApache.
+				//Called a function in Principale.java using an object class Principale. Take all the data in variables as factors in insertApache.
 				princ.insertApache(laDate, leTemps, username, identity, requestType, codeStatus, sizeResponse, refererUrl, userAgent);
 				lineRead= reader.readLine();
 			}
