@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//import classes needed
 package server;
 import java.net.*;
 import java.io.*;
@@ -17,25 +19,37 @@ public class Server {
     /**
      * @param args the command line arguments
      */
+    
+    //Creation of variables 
     //public String addIP;
-    public String url;
-    public String serverName;
+    public String url;		//url of the server		
+    public String serverName;	//name of server determined by user
+	
+    //Creation of variable of class Princiaple
     private Principale princ; 
     public Server(Principale p){
         princ=p;
     }
-    //constructeur par defaut 
+	
+    	//-------------------------------------------------------//
+      	//  Creating constructor by default and with factors	//
+      	//---------------------------------------------------- //
     public Server(){
         
         url="";
         serverName="";
     }
-    //constructeur avec tous les parametres
+	
+    //Constructor with factors
     public Server(String link, String name){
         url=link;
         serverName=name;
     }
-    //accessseurs
+	
+  	 //--------------------------------------------------------------//
+      	//  Creating accessors for each variables, will be used in GUI  //
+      	//--------------------------------------------------------------//
+    //Writing accessors
     public void setUrl(String newUrl){
         url=newUrl;
         
@@ -43,20 +57,22 @@ public class Server {
     public void setServerName(String newName){
         serverName=newName;
     }
+	
+    //Reading accessors
     public String getUrl(){
         return url;
     }
     public String getServerName(){
         return serverName;
     }
-       
+       //Creating a String list
      public ArrayList<String> listlogs (String url) {
       ArrayList<String> logList = new ArrayList<String>();
 
         
 
       //-----------------------------------------------------//
-      //  Step 1:  Start creating a few objects we'll need.
+      //  Step 1:  Start creating a few objects we'll need.  //
       //-----------------------------------------------------//
 
       URL u;
@@ -112,7 +128,8 @@ public class Server {
                     }
                 }
          }
-
+	     
+       //Show error message
        catch (MalformedURLException mue) {
 
          System.out.println("Ouch - a MalformedURLException happened.");
@@ -144,7 +161,7 @@ public class Server {
         
     
     
-        
+      
     public static void main(String[] args) {
         // TODO code application logic here
         /*Principale p;
