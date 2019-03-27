@@ -22,26 +22,35 @@ public class Logs {
         public Logs(Principale p){
         princ=p;
         }  
-	 //constructeur par defaut 
+
+    	//-------------------------------------------------------//
+      	//  Creating constructor by default and with factors	//
+      	//---------------------------------------------------- //
 	public Logs() {
 		this.addrIP="";
                 this.serv="";
 	}
-	//constructeur avec tous les parametres
+
 	public Logs(String leServeur) {
 		this.serv=leServeur;
 	}
         
-      
+  	    //--------------------------------------------------------------//
+      	//  Creating accessors for each variables, will be used in GUI  //
+      	//--------------------------------------------------------------//
 	
-	//accesseurs en lecture et ecriture
+	//Writing accessors 
 	public void setAddrIP(String leAddrIP) {
 		this.addrIP=leAddrIP;
 	}
-	
+	//Reading accessors
 	public String getAddrIP() {
 		return addrIP;
 	}
+
+  	    //--------------------------------------------------------------//
+      	//  Function used to create a local file of the log (in .txt)  	//
+      	//--------------------------------------------------------------//
 	
 	public  void createLogsFiles (String url) {
 		 if ( (url==null) )
@@ -59,7 +68,7 @@ public class Logs {
 		      u = new URL(this.serv+url);
 		      is = u.openStream();
 		      dis = new DataInputStream(new BufferedInputStream(is));
-		        File ff=new File(url+".txt"); // définir l'arborescence
+		        File ff=new File(url+".txt"); // Define name of the file 
 				ff.createNewFile();
 				FileWriter ffw=new FileWriter(ff);
 		      while ((s = dis.readLine()) != null)

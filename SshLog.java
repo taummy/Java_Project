@@ -15,7 +15,7 @@ import java.text.*;
 
 public class SshLog extends Logs{
 	
-	//----------------------------------------------------------//
+	    //----------------------------------------------------------//
       	//  Start creating a few objects and variables we'll need.  //
       	//--------------------------------------------------------- //
 	public String laDate; //Date 
@@ -57,7 +57,7 @@ public class SshLog extends Logs{
             this.session=session;
         }
 	
-	//--------------------------------------------------------------//
+        //--------------------------------------------------------------//
       	//  Creating accessors for each variables, will be used in GUI  //
       	//--------------------------------------------------------------//
         public String getDate(){
@@ -77,7 +77,7 @@ public class SshLog extends Logs{
         }
         
         
-	//----------------------------------------------------------------------------//
+	    //----------------------------------------------------------------------------//
       	//  Function for data parsing and the name of file as factor of the function  //
       	//--------------------------------------------------------------------------- //
 public void sshProcess(String file) {

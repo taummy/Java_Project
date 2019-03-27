@@ -15,9 +15,9 @@ import java.text.*;
 
 public class LogApache2 extends Logs{
 	
-	//----------------------------------------------------------//
-      	//  Start creating a few objects and variables we'll need.  //
-      	//--------------------------------------------------------- //
+	    //----------------------------------------------------------//
+        //  Start creating a few objects and variables we'll need.  //
+        //--------------------------------------------------------- //
 	public String laDate;
 	public String leTemps; // the date and time the request was received.
 	public String username; // user name determined by HTTP authentication
@@ -37,7 +37,7 @@ public class LogApache2 extends Logs{
         princ=p;
         }
         
-	//-------------------------------------------------------//
+	    //-------------------------------------------------------//
       	//  Creating constructor by default and with factors	//
       	//---------------------------------------------------- //
         public LogApache2(){
@@ -54,7 +54,7 @@ public class LogApache2 extends Logs{
             lineRead="";
         }
         
-	//Constructor with factors
+	
         public LogApache2(String date, String temps, String username, String identity, String requestType, String codeStatus, String sizeResponse, String refererUrl, String userAgent){
             this.laDate=date;
             this.leTemps=temps;
@@ -68,7 +68,7 @@ public class LogApache2 extends Logs{
             
         }
 	
-	//--------------------------------------------------------------//
+	    //--------------------------------------------------------------//
       	//  Creating accessors for each variables, will be used in GUI  //
       	//--------------------------------------------------------------//
         public String getLaDate(){
@@ -99,22 +99,22 @@ public class LogApache2 extends Logs{
             return userAgent;
         }
         
-	//----------------------------------------------------------------------------//
+	    //----------------------------------------------------------------------------//
       	//  Function for data parsing and the name of file as factor of the function  //
       	//--------------------------------------------------------------------------- //
 	
 	public void apacheProcess(String file) {
 		
-		//use BufferedReader to read file
+		//Use of BufferedReader to read the file
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			lineRead=reader.readLine();
 			while(lineRead !=null) {
 				splitLine=lineRead.split("]");
 				chaine1=splitLine[0].split("\\s+");
-				identity=chaine1[1]; //identity
-				username=chaine1[2]; //username
-				laDate=((chaine1[3].split(":"))[0]).substring(1); //la date
-				leTemps=((chaine1[3].split("/"))[2]).substring(5) + " " + chaine1[4]; //le temps avec +UTC
+				identity=chaine1[1]; //identity NO GOOD IDENTITY OF WHAT ???????
+				username=chaine1[2]; //Retrival of the username
+				laDate=((chaine1[3].split(":"))[0]).substring(1); //Retrival of the date
+				leTemps=((chaine1[3].split("/"))[2]).substring(5) + " " + chaine1[4]; //Retrival of the time with the good time zone (+UTC)
 				chaine2=splitLine[1].split("\"");
 				requestType=chaine2[1]; //type of request 
 				codeStatus=chaine2[2].split("\\s+")[1]; //status of code

@@ -39,14 +39,13 @@ public class Server {
         url="";
         serverName="";
     }
-	
-    //Constructor with factors
+
     public Server(String link, String name){
         url=link;
         serverName=name;
     }
 	
-  	 //--------------------------------------------------------------//
+  	     //--------------------------------------------------------------//
       	//  Creating accessors for each variables, will be used in GUI  //
       	//--------------------------------------------------------------//
     //Writing accessors
@@ -65,7 +64,7 @@ public class Server {
     public String getServerName(){
         return serverName;
     }
-       //Creating a String list
+       //Creating a String list of for the GUI
      public ArrayList<String> listlogs (String url) {
       ArrayList<String> logList = new ArrayList<String>();
 

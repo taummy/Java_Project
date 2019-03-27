@@ -11,6 +11,11 @@ import java.text.*;
  *
  * @author freddy
  */
+
+        //----------------------------------------------------------//
+        //  Start creating a few objects and variables we'll need.  //
+        //--------------------------------------------------------- //
+
 public class SquidLogs extends Logs {
     public String time;//La valeur correspondant au timestamp est une valeur en secondes appelee epoch qui est le nombre de secondes ecoulles depuis January 1, 1970, 00:00:00 GMT
     public String dateExacte;//Ce timestamp doit etre converti en une date plus lisible
@@ -33,6 +38,10 @@ public class SquidLogs extends Logs {
     public SquidLogs(Principale p){
         princ=p;
     }
+
+        //-----------------------------------------------------//
+        //  Creating constructor by default and with factors   //
+        //---------------------------------------------------- //
     
     public SquidLogs(){
         
@@ -65,6 +74,10 @@ public class SquidLogs extends Logs {
         this.requestMethod=requestMethod;
         this.status=status;
     }
+
+        //--------------------------------------------------------------//
+        //  Creating accessors for each variables, will be used in GUI  //
+        //--------------------------------------------------------------//
     public String getRemoteHost(){
         return remoteHost;
     }
@@ -103,7 +116,9 @@ public class SquidLogs extends Logs {
     
     
     
-    
+        //----------------------------------------------------------------------------//
+        //  Function for data parsing and the name of file as factor of the function  //
+        //--------------------------------------------------------------------------- //
     
     
         public void squidProcess(String file){

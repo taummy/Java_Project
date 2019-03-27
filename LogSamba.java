@@ -16,6 +16,9 @@ import java.util.regex.Pattern;
 
 public class LogSamba extends Logs {
 	
+        //----------------------------------------------------------//
+        //  Start creating a few objects and variables we'll need.  //
+        //--------------------------------------------------------- //
 	public String leDate ;
 	public String lheure;
 	public String IPConnectee ;
@@ -23,6 +26,8 @@ public class LogSamba extends Logs {
 	public String user;
 	public String salle;
 	public String state;
+
+	
         private Principale princ;
         public LogSamba(Principale p){
             princ=p;
@@ -32,7 +37,9 @@ public class LogSamba extends Logs {
 	
 	
 	
-	
+        //-----------------------------------------------------//
+        //  Creating constructor by default and with factors   //
+        //---------------------------------------------------- //
 	
 	public LogSamba(){
 		//super();
@@ -57,35 +64,34 @@ public class LogSamba extends Logs {
 		this.state=state;
 	}
 	
+	    //--------------------------------------------------------------//
+        //  Creating accessors for each variables, will be used in GUI  //
+        //--------------------------------------------------------------//
 	public String getDate(){
 		return leDate;
-		
 	}
-        public String getHeure(){
-            return lheure;
-        }
-        public String getUser(){
-            return user;
-        }
-	
+    public String getHeure(){
+        return lheure;
+    }
+    public String getUser(){
+        return user;
+    }
 	public String getIP(){
-		return IPConnectee;
-		
+		return IPConnectee;	
 	}
 	public String getService(){
-		return service;
-		
+		return service;	
 	}
 	public String getSalle(){
-		return salle;
-		
+		return salle;	
 	}
 	public String getState(){
 		return state;
-		
 	}
 	
-	
+	    //----------------------------------------------------------------------------//
+      	//  Function for data parsing and the name of file as factor of the function  //
+      	//--------------------------------------------------------------------------- //
 	
 	 public  void sambaProcess(String file){
 	        
