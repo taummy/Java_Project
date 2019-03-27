@@ -41,7 +41,6 @@ public class SshLog extends Logs{
             laDate="";
             leTemps="";
             nomServer="";
-            numeroPort="";
             typeConnection="";
             session="";
             lineRead="";
