@@ -14,6 +14,15 @@ import java.sql.*;
  *
  * @author freddy
  */
+/*
+Welcome to the Principale class ! This class is the playmaker of the project because it contains methods for:
+*database connection
+*tables creation and suppression
+*adding information into specific tables
+*perform some requests on the tables
+
+
+*/
 public class Principale {
     
     
@@ -21,11 +30,13 @@ public class Principale {
     //Let's implement the database
     
     //Creation of the database and connection
-    //Our database will hold 5 tables : 1 for Servers, and 4  for the different Log chld classes
+    //Our database will hold 5 tables : 1 for Servers, and 4  for the different Log child classes
+    
+    //To interact with our database via Java we use the JavaDataBaseConnection in SQLite
 public void createNewDatabase(String dbName) {
     
     String link="jdbc:sqlite:"+dbName;         
-    try(Connection connex = DriverManager.getConnection(link)){
+    try(Connection connex = DriverManager.getConnection(link)){ //create a connection object that we'll be using later
        if(connex != null){
            DatabaseMetaData meta = connex.getMetaData();
            System.out.println("The driver name is "+meta.getDriverName());
@@ -40,7 +51,7 @@ public void connectToDatabase(){
         Connection conn = null;
         try {
             
-            String url = "jdbc:sqlite:test.db";
+            String url = "jdbc:sqlite:test.db";//We precise the path of a database that already exists
             conn = DriverManager.getConnection(url);
             System.out.println("Connection established !");
             
@@ -60,7 +71,7 @@ public void connectToDatabase(){
 
 public Connection connect() {
         // SQLite connection string
-        String url = "jdbc:sqlite:test.db";
+        String url = "jdbc:sqlite:test.db";//We precise the path of a database that already exists
         Connection connex = null;
         try {
             connex = DriverManager.getConnection(url);
@@ -69,7 +80,7 @@ public Connection connect() {
         }
         return connex;
     }
-public void disconnect(Connection c){
+public void disconnect(Connection c){//this function takes a connection object as a parameter and closes the connection
     try{
         c.close();
     }catch(SQLException e){
@@ -77,6 +88,12 @@ public void disconnect(Connection c){
 
     }
 }
+
+/*
+The following function is to create a servers table if it doesn't exist yet
+We'll have 3 fields : id, url and serverName
+Since it is a request, we have to prepare it first before executing it
+*/
 public void createNewTableServer(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS servers (\n"
@@ -91,6 +108,10 @@ public void createNewTableServer(){
             System.out.println(e.getMessage());
         }
 }
+
+/*
+Now we create a function to add a new server to the table with a insert into request
+*/
 public  void insertServer(String url, String serverName){
         String link= "jdbc:sqlite:test.db";
         String sql ="INSERT OR IGNORE INTO servers(url, serverName) VALUES(?,?)";
@@ -103,6 +124,10 @@ public  void insertServer(String url, String serverName){
         }
          
  }
+
+/*
+Now we create a function to remove a server from the table with a delete from request
+*/
 public void deleteServer(String url) {
         String sql = "DELETE FROM servers WHERE url = ?";
  
@@ -118,6 +143,11 @@ public void deleteServer(String url) {
             System.out.println(e.getMessage());
         }
     }
+
+/*
+This function will be used in our firstview to display the available servers
+We save them in an arraylist of server objects and we'll display elements from that arraylist in the firstview
+*/
 public ArrayList<Server> printServers(){
         ArrayList<Server> serversList = new ArrayList<>();
         String sql = "SELECT url, serverName FROM servers";
@@ -126,7 +156,7 @@ public ArrayList<Server> printServers(){
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
             
-            // loop through the result set
+            // loop through the result set and add each element to the arraylist using the server class constructor
             while (rs.next()) {
                 serversList.add(new Server(rs.getString("url"), rs.getString("serverName")));
             }
@@ -136,8 +166,13 @@ public ArrayList<Server> printServers(){
         }
         return serversList;
     }
+/*
+Next we are creating functions for every type of log child class
+One to create the table and another one to insert data into it
 
 
+*/
+//Function to create a table for apache log
  public void createNewTableApache(){
         String url = "jdbc:sqlite:test.db";
         String sql = "CREATE TABLE IF NOT EXISTS apacheLog (\n"
@@ -334,22 +369,6 @@ public ArrayList<Server> printServers(){
             System.out.println(e.getMessage());
         }
   }*/
-
-
-
-    
-    
-        
-
-    //}
-
-   /*
-     public  void deleteServer(){   
-        }*/
-    
-     //WE CAN ALSO TRY THE toArray() METHOD IF THIS ISN'T WORKING
-    
-    //}
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Principale pl;

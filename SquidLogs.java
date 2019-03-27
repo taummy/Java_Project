@@ -12,10 +12,10 @@ import java.text.*;
  * @author freddy
  */
 
-        //----------------------------------------------------------//
-        //  Start creating a few objects and variables we'll need.  //
-        //--------------------------------------------------------- //
-
+/*
+Welcome to the squidLogs class. This one contains the method to to process the squid log so as to have
+a simpler version
+*/
 public class SquidLogs extends Logs {
     public String time;//La valeur correspondant au timestamp est une valeur en secondes appelee epoch qui est le nombre de secondes ecoulles depuis January 1, 1970, 00:00:00 GMT
     public String dateExacte;//Ce timestamp doit etre converti en une date plus lisible
@@ -35,13 +35,11 @@ public class SquidLogs extends Logs {
     public String[] splitLine;//Tableau de chaines de caracteres qui le resultat du decoupage d'une ligne
     public String line;
     private Principale princ;
+    
+    //We create a Principale object to acces the insertSquid method
     public SquidLogs(Principale p){
         princ=p;
     }
-
-        //-----------------------------------------------------//
-        //  Creating constructor by default and with factors   //
-        //---------------------------------------------------- //
     
     public SquidLogs(){
         
@@ -74,10 +72,6 @@ public class SquidLogs extends Logs {
         this.requestMethod=requestMethod;
         this.status=status;
     }
-
-        //--------------------------------------------------------------//
-        //  Creating accessors for each variables, will be used in GUI  //
-        //--------------------------------------------------------------//
     public String getRemoteHost(){
         return remoteHost;
     }
@@ -106,55 +100,41 @@ public class SquidLogs extends Logs {
         return status;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        //----------------------------------------------------------------------------//
-        //  Function for data parsing and the name of file as factor of the function  //
-        //--------------------------------------------------------------------------- //
-    
-    
         public void squidProcess(String file){
 
-            try(BufferedReader reader = new BufferedReader(new FileReader(file))){//on cree un objet BufferedReader appele reader pour lire un fichier de log qui sera passe en parametre
-
+            try(BufferedReader reader = new BufferedReader(new FileReader(file))){
+//we create a BufferedReader object called reader to read the logfile given as a parameter
+//Now we'll process our reader line by line
                 lineRead= reader.readLine();
                 while (lineRead != null){
-                    splitLine=lineRead.split("\\s+");
+                    splitLine=lineRead.split("\\s+");//we split the line by the space without caring about multiple spaces
                     time=splitLine[0];
-                    double time1= Double.parseDouble(time);//Le timestamp doit etre converti en double puis en Long
+                    double time1= Double.parseDouble(time);//The timestamp must be casted into double then into long
                     long time2=(new Double(time1)).longValue();
-                    Date date = new Date(time2*1000L);//Java mesure le temps en millisecondes donc on multiplie le nombre de secondes par 1000
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'à' HH:mm:ss z");//on precise le format de temps souhaite
+                    Date date = new Date(time2*1000L);//Java uses millisecond as time unit so we multiply the secons by 1000
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy 'à' HH:mm:ss z");//we percise the time format we want
                     dateExacte = sdf.format(date);
 
                     duration=splitLine[1];
                     remoteHost=splitLine[2];
-                    codeStatus=splitLine[3];//On divise codeStatus en deux parties : code et status
+                    codeStatus=splitLine[3];//we divide codeStatus into two parts : code and status
                     code=(codeStatus.split("/"))[0];
                     status=(codeStatus.split("/"))[1];
                     bytes=splitLine[4];
                     requestMethod=splitLine[5];
                     url=splitLine[6];
-                    //Le splitLine[7] n'est pas pris en compte car ce n'est qu'un tiret
-                    peerStatusPeerHost=splitLine[8];//On divise peerStatusPeerHost en deux parties peerStatus et peerHost
+                    //the splitLine[7] is omitted because it's a simple "-"
+                    peerStatusPeerHost=splitLine[8];//we divide peerStatusPeerHost into two parts peerStatus and peerHost
                     peerStatus=(peerStatusPeerHost.split("/"))[0];
                     peerHost=(peerStatusPeerHost.split("/"))[1];
                     contentType=splitLine[9];
-                    //stockage des informations dans un fichier .processed.txt
+                    //saving information into a  .processed.txt file
                     /*line ="Un utilisateur s'est connecté avec l'adresse IP interne "+remoteHost+" le "+dateExacte+" et a demandé l'objet "+url+" hébergé par un serveur à l'adresse IP "+peerHost+". "+bytes+" octets de type "+contentType+" ont été échangés pendant une durée de "+duration+" ms. La méthode HTTP utilisée est "+requestMethod+" et le code HTTP retourné est "+status+".";
                     try(BufferedWriter writer = new BufferedWriter(new FileWriter(file+".processed.txt",true))){//on cree un objet BufferedWriter appele writer pour ecrire dans un nouveau fichier nomme a partir du fichier de log passe en parametre+ l'extension .processed.txt
                         writer.write(line+"\n");
                     }*/
 
-                    //Ajout des informations dans la base de donnees
+                    //Adding the information to the squid table using insertSquid
                     princ.insertSquid(remoteHost,dateExacte,url,peerHost,bytes,contentType,duration,requestMethod,status);
 
                     //System.out.println(line);

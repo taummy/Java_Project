@@ -26,7 +26,17 @@ public class ThirdView extends javax.swing.JFrame {
     public ThirdView() {
         initComponents();
     }
-    public String logType;
+    public String logType;//a variable to get the selected log from the secondview
+    /*
+    SO !
+    For each logtype, we create two methods : 
+    *logLogsList to perform the request from the database with the given
+    parameters and return an arraylist of the logtype objects
+    *showlog which calls the previous function and customizes default table model to display the returned  arrayliust 
+    
+    */
+    
+    
     
    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Log table for SQUID%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
     public ArrayList<SquidLogs> squidLogsList(String param, String valeur){
@@ -320,6 +330,10 @@ public class ThirdView extends javax.swing.JFrame {
         String selectedParam = view3parameterscroller.getSelectedItem().toString();//this method returns an object so we had to cast into an string
         String valeur = view3castparameter.getText();
         
+        /*
+        each of these methods takes rwo parameters to make the request from the database so we get them from
+        the scroller and the textview
+        */
         switch(logType){
             case "exemple.apache2.access.log":
                 showApache(selectedParam,valeur);
