@@ -74,15 +74,15 @@ public class Logs {
 		      while ((s = dis.readLine()) != null)
 		      {
 		      
-				ffw.write(s);  // écrire une ligne dans le fichier resultat.txt
-				ffw.write("\n"); // forcer le passage à la ligne
+				ffw.write(s);  // ffw will write a line in the text file as long as the s variable is not empty
+				ffw.write("\n"); // next line in text
 				
 		      }
-		      ffw.close(); // fermer le fichier à la fin des traitements
+		      ffw.close(); // close the buffer so that we flush out all remaining text in the buffer
 		    }
 		    catch (MalformedURLException mue)
 		    {
-		      System.err.println("Ouch - a MalformedURLException happened.");
+		      System.err.println("Ouch - a MalformedURLException happened."); // error if no internet connection/wrong url
 		      mue.printStackTrace();
 		      System.exit(2);
 		    }
