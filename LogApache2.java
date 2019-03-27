@@ -41,7 +41,6 @@ public class LogApache2 extends Logs{
       	//  Creating constructor by default and with factors	//
       	//---------------------------------------------------- //
         public LogApache2(){
-            remoteHost="";
             laDate="";
             leTemps="";
             username="";
